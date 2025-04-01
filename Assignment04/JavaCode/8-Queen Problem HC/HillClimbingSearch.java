@@ -2,7 +2,7 @@
 //Program to implement Hill Climbing with random restart to solve N-queens problem
 import java.util.Random;
 
-public class HillClimbingSearch {
+public class HillClimbingSearch implements Runnable {
     private int n;
     private int heuristic = 0;
     private int presentHeuristic;
@@ -108,7 +108,7 @@ public class HillClimbingSearch {
         NQueen[] presentBoard = generateBoard();
         presentHeuristic = findHeuristic(presentBoard);
         // test if the present board is the solution board
-        while (presentHeuristic != 0) {
+        while (presentHeuristic != 0 && Thread.currentThread().isInterrupted() == false) {
             // Get the next board
             // printState(presentBoard);
             presentBoard = nextBoard(presentBoard);
